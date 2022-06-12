@@ -2,10 +2,10 @@
  
 use CodeIgniter\Model;
  
-class Orgmodel extends Model{
+class Dprmodel extends Model{
     protected $table = 'tbl_dpr';
     protected $primaryKey = 'dpr_id';
-    protected $allowedFields = ['dpr_id', 'dpr_nama', 'dpr_tingkat', 'datecreated', 'datemodified'];
+    protected $allowedFields = ['dpr_id', 'kodedpr', 'dpr_nama', 'dpr_tingkat', 'nosk', 'file_sk', 'expired', 'datecreated', 'datemodified'];
     protected $useAutoIncrement = true;
     protected $returnType     = 'array';
     

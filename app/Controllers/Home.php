@@ -9,13 +9,20 @@ class Home extends BaseController
     public function index()
     {
         $session = session();
+        $logged_in = $session->get('logged_in');
+        $data['role'] = $session->get('role');
+        $data['tipe_user'] = $session->get('tipe_user');
+        $data['logged_in'] = $logged_in;
         $data['title'] = "Sistem Informasi Anggota ICHI";
         $data['page_title'] = "Anggota ICHI";
-        return view('main/dashboard', $data);
+        return view('main/dashboard1', $data);
     }
 
     public function daftar()
     {
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $data['logged_in'] = $logged_in;
         $data['title'] = "Sistem Informasi Anggota ICHI";
         $data['page_title'] = "Daftar Anggota ICHI";
         return view('main/daftar', $data);
@@ -107,6 +114,9 @@ class Home extends BaseController
 
     public function login()
     {
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $data['logged_in'] = $logged_in;
         $data['title'] = "Sistem Informasi Anggota ICHI";
         $data['page_title'] = "Login Anggota ICHI";
         return view('main/login', $data);
@@ -130,17 +140,41 @@ class Home extends BaseController
             if($data){
                 $pass = $data['password'];
                 $verify_pass = password_verify($password, $pass);
+                $tipe_user = $data['type'];
                 if($verify_pass){
+                    $issadmin = $tipe_user[0]=='y' ? TRUE : FALSE;
+                    $isadmin = $tipe_user[1]=='y' ? TRUE : FALSE;
+                    $isanggota = $tipe_user[2]=='y' ? TRUE : FALSE;
+                    $iscalon = $tipe_user[3]=='y' ? TRUE : FALSE;
                     $ses_data = [
                         'user_id'           => $data['user_id'],
                         'username'          => $data['username'],
                         'status'            => $data['status'],
                         'tipe_user'         => $data['type'],
                         'confirm'           => $data['confirm'],
+                        'issadmin'          => $issadmin,
+                        'isadmin'           => $isadmin,
+                        'isanggota'         => $isanggota,
+                        'iscalon'           => $iscalon,
                         'logged_in'         => TRUE
                     ];
                     $session->set($ses_data);
-                    return redirect()->to('/anggota');
+                    if ($issadmin){
+                        $session->set('role', 'superadmin');
+                        return redirect()->to('/superadmin');                        
+                    }elseif($isadmin){
+                        $session->set('role', 'admin');
+                        return redirect()->to('/admin');
+                    }elseif($isanggota){
+                        $session->set('role', 'anggota');
+                        return redirect()->to('/confanggota');
+                    }elseif($iscalon){
+                        $session->set('role', 'calon');
+                        return redirect()->to('/anggota');
+                    }else{
+                        $session->destroy();
+                        return redirect()->to('/home');
+                    }
                 }else{
                     $session->setFlashdata('msg', 'Salah password.');
                     return redirect()->to('/home/login');

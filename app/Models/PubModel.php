@@ -2,10 +2,10 @@
  
 use CodeIgniter\Model;
  
-class Orgmodel extends Model{
+class Pubmodel extends Model{
     protected $table = 'tbl_publikasi';
     protected $primaryKey = 'pub_id';
-    protected $allowedFields = ['pub_id', 'user_id', 'tipepublikasi', 'judul', 'mediapublikasi', 'tahun', 'datecreated', 'datemodified'];
+    protected $allowedFields = ['pub_id', 'user_id', 'tipepublikasi', 'judul', 'mediapublikasi', 'tahun', 'linkpub', 'datecreated', 'datemodified'];
     protected $useAutoIncrement = true;
     protected $returnType     = 'array';
     

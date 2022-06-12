@@ -2,7 +2,7 @@
  
 use CodeIgniter\Model;
  
-class Orgmodel extends Model{
+class Kerjamodel extends Model{
     protected $table = 'tbl_pekerjaan';
     protected $primaryKey = 'kerja_id';
     protected $allowedFields = ['kerja_id', 'user_id', 'namainstansi', 'jabatan', 'thnawal', 'thnakhir', 'datecreated', 'datemodified'];

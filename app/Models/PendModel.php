@@ -2,7 +2,7 @@
  
 use CodeIgniter\Model;
  
-class Orgmodel extends Model{
+class Pendmodel extends Model{
     protected $table = 'tbl_pendidikan';
     protected $primaryKey = 'pend_id';
     protected $allowedFields = ['pend_id', 'user_id', 'jenjang', 'namauniv', 'fakultas', 'jurusan', 'thnmasuk', 'thnlulus', 'datecreated', 'datemodified'];

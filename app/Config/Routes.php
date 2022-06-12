@@ -35,6 +35,15 @@ $routes->get('/', 'Home::index');
 
 //login anggota
 $routes->get('/anggota', 'Anggota::index', ['filter' => 'authlogin']);
+$routes->get('/anggota/profile', 'Anggota::profile', ['filter' => 'authlogin']);
+$routes->get('/anggota/buatprofile', 'Anggota::buatprofile', ['filter' => 'authlogin']);
+$routes->get('/anggota/buatprofileproses', 'Anggota::buatprofileproses', ['filter' => 'authlogin']);
+$routes->get('/anggota/ubahprofile/(:any)', 'Anggota::ubahprofile/$1', ['filter' => 'authlogin']);
+$routes->get('/anggota/ubahprofileproses', 'Anggota::ubahprofileproses', ['filter' => 'authlogin']);
+$routes->get('/anggota/ubahpass/(:any)', 'Anggota::ubahpass/$1', ['filter' => 'authlogin']);
+$routes->get('/anggota/ubahpassproses', 'Anggota::ubahpassproses', ['filter' => 'authlogin']);
+$routes->get('/anggota/konfirmasi', 'Anggota::konfirmasi', ['filter' => 'authlogin']);
+$routes->get('/anggota/konfirmproses', 'Anggota::konfirmproses', ['filter' => 'authlogin']);
 
 /*
  * --------------------------------------------------------------------

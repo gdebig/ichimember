@@ -47,9 +47,33 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
+                <?php
+                        if ($role=='superadmin'){
+                        ?>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="<?php echo base_url();?>/anggota" class="nav-link">Beranda</a>
+                    <a href="<?php echo base_url();?>/superadmin" class="nav-link">Dashboard</a>
                 </li>
+                <?php
+                        } elseif ($role=='admin'){
+                        ?>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="<?php echo base_url();?>/admin" class="nav-link">Dashboard</a>
+                </li>
+                <?php
+                        } elseif ($role=='anggota'){
+                        ?>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="<?php echo base_url();?>/anggota" class="nav-link">Dashboard</a>
+                </li>
+                <?php
+                        } elseif ($role=='calon'){
+                        ?>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="<?php echo base_url();?>/anggota" class="nav-link">Dashboard</a>
+                </li>
+                <?php
+                        }
+                        ?>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="<?php echo base_url();?>/anggota/petunjuk" class="nav-link">Petunjuk Penggunaan</a>
                 </li>
@@ -62,9 +86,33 @@
             <!-- Brand Logo -->
             <img src="<?= base_url();?>/assets/img/logo_ichi.png" alt="Logo ICHI"
                 class="brand-image img-circle elevation-3" style="opacity: .8" width="30%" height="30%">
+            <?php
+                        if ($role=='superadmin'){
+                        ?>
+            <a href="<?php echo base_url();?>/superadmin" class="brand-link">
+                <span class="brand-text font-weight-light">Dashboard Anggota <br />ICHI</span>
+            </a>
+            <?php
+                        } elseif ($role=='admin'){
+                        ?>
+            <a href="<?php echo base_url();?>/admin" class="brand-link">
+                <span class="brand-text font-weight-light">Dashboard Anggota <br />ICHI</span>
+            </a>
+            <?php
+                        } elseif ($role=='anggota'){
+                        ?>
             <a href="<?php echo base_url();?>/anggota" class="brand-link">
                 <span class="brand-text font-weight-light">Dashboard Anggota <br />ICHI</span>
             </a>
+            <?php
+                        } elseif ($role=='calon'){
+                        ?>
+            <a href="<?php echo base_url();?>/anggota" class="brand-link">
+                <span class="brand-text font-weight-light">Dashboard Anggota <br />ICHI</span>
+            </a>
+            <?php
+                        }
+                        ?>
             <?php
                 if ($logged_in){
             ?>
@@ -81,59 +129,86 @@
                         <li class="nav-item menu-open">
                             <ul class="nav">
                                 <li class="nav-item">
+                                    <a href="<?php echo base_url();?>" class="nav-link">
+                                        <i class="fas fa-home nav-icon"></i>
+                                        <p>Beranda</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="<?php echo base_url();?>/anggota/profile" class="nav-link">
                                         <i class="far fa-user nav-icon"></i>
                                         <p>Profile</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url();?>/anggota/pendidikan" class="nav-link">
+                                    <a href="<?php echo base_url();?>/pendidikan" class="nav-link">
                                         <i class="fas fa-graduation-cap nav-icon"></i>
                                         <p>Pendidikan</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url();?>/anggota/pengkerja" class="nav-link">
+                                    <a href="<?php echo base_url();?>/pengkerja" class="nav-link">
                                         <i class="fas fa-users nav-icon"></i>
                                         <p>Pengalaman Kerja</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url();?>/anggota/organisasi" class="nav-link">
-                                        <i class="fas  fa-trophy nav-icon"></i>
+                                    <a href="<?php echo base_url();?>/organisasi" class="nav-link">
+                                        <i class="fas fa-trophy nav-icon"></i>
                                         <p>Organisasi</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url();?>/anggota/pelatihan" class="nav-link">
-                                        <i class="fas fa-building nav-icon"></i>
-                                        <p>Pendidikan/Pelatihan Teknik/Manajemen</p>
+                                    <a href="<?php echo base_url();?>/publikasi" class="nav-link">
+                                        <i class="fas fa-scroll nav-icon"></i>
+                                        <p>Publikasi</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url();?>/anggota/sertifikat" class="nav-link">
-                                        <i class="fas fa-building nav-icon"></i>
-                                        <p>Sertifikat Kompetensi dan Bidang Lainnya (yang Relevan) yang Diikuti</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url();?>/anggota/kartul" class="nav-link">
-                                        <i class="fas fa-microphone nav-icon"></i>
-                                        <p>Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url();?>/anggota/seminar" class="nav-link">
-                                        <i class="fas fa-microphone nav-icon"></i>
-                                        <p>Makalah/Tulisan Yang Disajikan Dalam Seminar/Lokakarya Keinsinyuran</p>
-                                    </a>
-                                </li>
+                                <?php
+                                if ($confirm=="tidak"){
+                                ?>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url();?>/anggota/konfirmasi" class="nav-link">
                                         <i class="fas fa-check-double nav-icon"></i>
                                         <p>Konfirmasi</p>
                                     </a>
                                 </li>
+                                <?php
+                                }
+                                ?>
+
+                                <?php
+                                if ($role=="superadmin"){
+                                ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url();?>/mandpr" class="nav-link">
+                                        <i class="fas fa-folder"></i>
+                                        &nbsp;&nbsp;<p>Manajemen DPR</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url();?>/mananggota" class="nav-link">
+                                        <i class="fas fa-users"></i>
+                                        &nbsp;&nbsp;<p>Manajemen Anggota</p>
+                                    </a>
+                                </li>
+                                <?php
+                                }
+                                ?>
+
+                                <?php
+                                    $jmlrole = substr_count($tipe_user, 'y');
+                                    if ($jmlrole>1){
+                                ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url();?>/anggota/ubahrole" class="nav-link">
+                                        <i class="fas fa-user-tag nav-icon"></i>
+                                        <p>Ubah Peran</p>
+                                    </a>
+                                </li>
+                                <?php
+                                    }
+                                ?>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url();?>/home/logout" class="nav-link">
                                         <i class="fas fa-sign-out-alt nav-icon"></i>
@@ -163,7 +238,29 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="<?php echo base_url();?>/anggota">Beranda</a></li>
+                                <?php
+                        if ($role=='superadmin'){
+                        ?>
+                                <li class="breadcrumb-item"><a href="<?php echo base_url();?>/superadmin">Dashboard</a>
+                                </li>
+                                <?php
+                        } elseif ($role=='admin'){
+                        ?>
+                                <li class="breadcrumb-item"><a href="<?php echo base_url();?>/admin">Dashboard</a>
+                                </li>
+                                <?php
+                        } elseif ($role=='anggota'){
+                        ?>
+                                <li class="breadcrumb-item"><a href="<?php echo base_url();?>/anggota">Dashboard</a>
+                                </li>
+                                <?php
+                        } elseif ($role=='calon'){
+                        ?>
+                                <li class="breadcrumb-item"><a href="<?php echo base_url();?>/anggota">Dashboard</a>
+                                </li>
+                                <?php
+                        }
+                        ?>
                                 <li class="breadcrumb-item active"><?= $data_bread?></li>
                             </ol>
                         </div><!-- /.col -->
@@ -221,7 +318,6 @@
             showDropdowns: true,
             changeMonth: true,
             minYear: 1901,
-            maxYear: parseInt(moment().format('YYYY'), 10),
             locale: {
                 format: 'YYYY-MM-DD'
             }

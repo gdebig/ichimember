@@ -1,0 +1,70 @@
+CRITICAL - 2022-06-07 09:48:13 --> Too few arguments to function App\Controllers\Anggota::ubahpass(), 0 passed in D:\wamp64\www\ichimember\system\CodeIgniter.php on line 832 and exactly 1 expected
+#0 D:\wamp64\www\ichimember\system\CodeIgniter.php(832): App\Controllers\Anggota->ubahpass()
+#1 D:\wamp64\www\ichimember\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Anggota))
+#2 D:\wamp64\www\ichimember\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\ichimember\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-06-07 10:05:25 --> Invalid file: register/konfirmasi.php
+#0 D:\wamp64\www\ichimember\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('register/konfir...')
+#1 D:\wamp64\www\ichimember\system\Common.php(1089): CodeIgniter\View\View->render('register/konfir...', Array, true)
+#2 D:\wamp64\www\ichimember\app\Controllers\Anggota.php(720): view('register/konfir...', Array)
+#3 D:\wamp64\www\ichimember\system\CodeIgniter.php(832): App\Controllers\Anggota->konfirmproses()
+#4 D:\wamp64\www\ichimember\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Anggota))
+#5 D:\wamp64\www\ichimember\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 D:\wamp64\www\ichimember\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-06-07 17:08:57 --> Undefined variable: user_id
+#0 D:\wamp64\www\ichimember\app\Views\member\tambahpendvalid.php(19): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\i...', 19, Array)
+#1 D:\wamp64\www\ichimember\system\View\View.php(210): include('D:\\wamp64\\www\\i...')
+#2 D:\wamp64\www\ichimember\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\ichimember\system\Common.php(1089): CodeIgniter\View\View->render('member/tambahpe...', Array, true)
+#4 D:\wamp64\www\ichimember\app\Controllers\Pendidikan.php(113): view('member/tambahpe...', Array)
+#5 D:\wamp64\www\ichimember\system\CodeIgniter.php(832): App\Controllers\Pendidikan->tambahpendproses()
+#6 D:\wamp64\www\ichimember\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pendidikan))
+#7 D:\wamp64\www\ichimember\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\ichimember\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-06-07 17:11:50 --> Column 'namauniv' cannot be null
+CRITICAL - 2022-06-07 17:11:50 --> Column 'namauniv' cannot be null
+#0 D:\wamp64\www\ichimember\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `tb...', 0)
+#1 D:\wamp64\www\ichimember\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 D:\wamp64\www\ichimember\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 D:\wamp64\www\ichimember\system\Database\BaseBuilder.php(1771): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', Array, false)
+#4 D:\wamp64\www\ichimember\system\Model.php(239): CodeIgniter\Database\BaseBuilder->insert()
+#5 D:\wamp64\www\ichimember\system\BaseModel.php(738): CodeIgniter\Model->doInsert(Array)
+#6 D:\wamp64\www\ichimember\system\Model.php(625): CodeIgniter\BaseModel->insert(Array, false)
+#7 D:\wamp64\www\ichimember\system\BaseModel.php(658): CodeIgniter\Model->insert(Array, false)
+#8 D:\wamp64\www\ichimember\app\Controllers\Pendidikan.php(104): CodeIgniter\BaseModel->save(Array)
+#9 D:\wamp64\www\ichimember\system\CodeIgniter.php(832): App\Controllers\Pendidikan->tambahpendproses()
+#10 D:\wamp64\www\ichimember\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pendidikan))
+#11 D:\wamp64\www\ichimember\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 D:\wamp64\www\ichimember\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2022-06-07 17:13:41 --> Undefined index: thnkeluar
+#0 D:\wamp64\www\ichimember\app\Views\member\pendidikan.php(64): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'D:\\wamp64\\www\\i...', 64, Array)
+#1 D:\wamp64\www\ichimember\system\View\View.php(210): include('D:\\wamp64\\www\\i...')
+#2 D:\wamp64\www\ichimember\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\ichimember\system\Common.php(1089): CodeIgniter\View\View->render('member/pendidik...', Array, true)
+#4 D:\wamp64\www\ichimember\app\Controllers\Pendidikan.php(26): view('member/pendidik...', Array)
+#5 D:\wamp64\www\ichimember\system\CodeIgniter.php(832): App\Controllers\Pendidikan->index()
+#6 D:\wamp64\www\ichimember\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pendidikan))
+#7 D:\wamp64\www\ichimember\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\ichimember\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-07 17:22:23 --> Call to undefined function set_value()
+#0 D:\wamp64\www\ichimember\system\View\View.php(210): include()
+#1 D:\wamp64\www\ichimember\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#2 D:\wamp64\www\ichimember\system\Common.php(1089): CodeIgniter\View\View->render('member/ubahpend...', Array, true)
+#3 D:\wamp64\www\ichimember\app\Controllers\Pendidikan.php(150): view('member/ubahpend...', Array)
+#4 D:\wamp64\www\ichimember\system\CodeIgniter.php(832): App\Controllers\Pendidikan->ubahpendidikan('1')
+#5 D:\wamp64\www\ichimember\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pendidikan))
+#6 D:\wamp64\www\ichimember\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\wamp64\www\ichimember\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-06-07 17:27:59 --> Undefined variable: id
+#0 D:\wamp64\www\ichimember\app\Controllers\Pendidikan.php(219): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\i...', 219, Array)
+#1 D:\wamp64\www\ichimember\system\CodeIgniter.php(832): App\Controllers\Pendidikan->ubahpendproses()
+#2 D:\wamp64\www\ichimember\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pendidikan))
+#3 D:\wamp64\www\ichimember\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\ichimember\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}

@@ -91,6 +91,46 @@
                 </div>
 
                 <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+                    <?php
+                    if ($logged_in){
+                    ?>
+                    <li class="nav-item">
+                        <?php
+                        if ($role=='superadmin'){
+                        ?>
+                        <a class="nav-link" href="<?= base_url();?>/superadmin" role="button">
+                            <i class="fas fa-house-user"></i> &nbsp; Data Saya
+                        </a>
+                        <?php
+                        }
+                        ?>
+                        <?php
+                        if ($role=='admin'){
+                        ?>
+                        <a class="nav-link" href="<?= base_url();?>/admin" role="button">
+                            <i class="fas fa-house-user"></i> &nbsp; Data Saya
+                        </a>
+                        <?php
+                        }
+                        ?>
+                        <?php
+                        if (($role=='anggota')||($role=='calon')){
+                        ?>
+                        <a class="nav-link" href="<?= base_url();?>/anggota" role="button">
+                            <i class="fas fa-house-user"></i> &nbsp; Data Saya
+                        </a>
+                        <?php
+                        }
+                        ?>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url();?>/home/logout" role="button">
+                            <i class="fas fa-sign-out-alt"></i> &nbsp; Keluar
+                        </a>
+                    </li>
+                    <?php
+                    }else{
+                    ?>
                     <li class="nav-item">
                         <a class="nav-link" href="<?= base_url();?>/home/daftar" role="button">
                             <i class="fas fa-user-plus"></i> &nbsp; Daftar Anggota
@@ -101,6 +141,9 @@
                             <i class="fas fa-sign-in-alt"></i> &nbsp; Login Anggota
                         </a>
                     </li>
+                    <?php
+                    }
+                    ?>
 
                     <!--<li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
