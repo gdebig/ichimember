@@ -134,6 +134,9 @@
                                         <p>Beranda</p>
                                     </a>
                                 </li>
+                                <?php
+                                if (($role == "anggota")||($role == "calon")){
+                                ?>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url();?>/anggota/profile" class="nav-link">
                                         <i class="far fa-user nav-icon"></i>
@@ -165,8 +168,8 @@
                                     </a>
                                 </li>
                                 <?php
-                                if ($confirm=="tidak"){
-                                ?>
+                                    if ($confirm=="tidak"){
+                                    ?>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url();?>/anggota/konfirmasi" class="nav-link">
                                         <i class="fas fa-check-double nav-icon"></i>
@@ -174,6 +177,7 @@
                                     </a>
                                 </li>
                                 <?php
+                                    }
                                 }
                                 ?>
 
@@ -186,6 +190,16 @@
                                         &nbsp;&nbsp;<p>Manajemen DPR</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url();?>/mananggota" class="nav-link">
+                                        <i class="fas fa-users"></i>
+                                        &nbsp;&nbsp;<p>Manajemen Anggota</p>
+                                    </a>
+                                </li>
+                                <?php
+                                }
+                                if ($role=="admin"){
+                                ?>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url();?>/mananggota" class="nav-link">
                                         <i class="fas fa-users"></i>
