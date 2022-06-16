@@ -2,6 +2,11 @@
 
 namespace App\Controllers;
 
+use App\Models\DiriModel;
+use App\Models\KerjaModel;
+use App\Models\OrgModel;
+use App\Models\PendModel;
+use App\Models\PubModel;
 use App\Models\UserModel;
 
 class Mananggota extends BaseController
@@ -13,7 +18,7 @@ class Mananggota extends BaseController
         $logged_in = $session->get('logged_in');
         $model = new UserModel();
         $data['logged_in'] = $logged_in;
-        $member = $model->where('softdelete', 'Tidak')->orderby('user_id','DESC')->findall();
+        $member = $model->where('tbl_user.softdelete', 'Tidak')->join('tbl_datadiri', 'tbl_user.user_id = tbl_datadiri.user_id', 'left')->join('tbl_dpr', 'tbl_datadiri.dpr_id = tbl_dpr.dpr_id', 'left')->orderby('tbl_user.user_id','DESC')->findall();
         if (!empty($member)){
             $data['info_member'] = $member;
         }else{
@@ -60,7 +65,7 @@ class Mananggota extends BaseController
                     'label'  => 'Kode Anggota',
                     'rules'  => 'required|is_unique[tbl_user.kodeanggota]',
                     'errors' => [
-                        'required' => 'Field Kode member / DPP harus diisi.',
+                        'required' => 'Field Kode Anggota harus diisi.',
                         'is_unique' => 'Field Kode Anggota sudah digunakan. Ganti kode anggota.'
                     ],
                 ],
@@ -68,7 +73,7 @@ class Mananggota extends BaseController
                     'label'  => 'Username',
                     'rules'  => 'required|valid_email|is_unique[tbl_user.username]',
                     'errors' => [
-                        'required' => 'Field Nama member / DPP harus diisi.',
+                        'required' => 'Field Nama Anggota harus diisi.',
                         'is_unique' => 'Email yang digunakan sudah ada. Ganti email yang lain.',
                         'valid_email' => "Harus menggunakan format email yang benar.",
                     ],
@@ -189,7 +194,6 @@ class Mananggota extends BaseController
     public function ubahmemberproses(){
         $session = session();
         $model = new UserModel();
-        $user_id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
         $user_id = $this->request->getVar('user_id');
         $button=$this->request->getVar('submit');
@@ -201,17 +205,20 @@ class Mananggota extends BaseController
 
             $formvalid = $this->validate([
                 'kodeanggota' => [
-                    'label'  => 'Kode member / DPP',
+                    'label'  => 'Kode Anggota',
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Field Kode member / DPP harus diisi.',
+                        'required' => 'Field Kode Anggota harus diisi.',
+                        'is_unique' => 'Field Kode Anggota sudah digunakan. Ganti kode anggota.'
                     ],
                 ],
                 'username' => [
-                    'label'  => 'Nama member / DPP',
-                    'rules'  => 'required',
+                    'label'  => 'Username',
+                    'rules'  => 'required|valid_email',
                     'errors' => [
-                        'required' => 'Field Nama member / DPP harus diisi.',
+                        'required' => 'Field Nama Anggota harus diisi.',
+                        'is_unique' => 'Email yang digunakan sudah ada. Ganti email yang lain.',
+                        'valid_email' => "Harus menggunakan format email yang benar.",
                     ],
                 ],
                 'namalengkap' => [
@@ -221,45 +228,59 @@ class Mananggota extends BaseController
                         'required' => 'Field Nama Lengkap harus diisi.',
                     ],
                 ],
-                'status' => [
-                    'label'  => 'Tanggal Akhir SK',
-                    'rules'  => 'required',
+                'confirmpass' => [
+                    'label'  => 'confirmpass',
+                    'rules'  => 'matches[newpass]',
                     'errors' => [
-                        'required' => 'Field Tanggal Akhir SK harus diisi.',
-                    ],
-                ]
+                        'matches' => "Konfirmasi Password tidak sama.",
+                    ]
+                ],
             ]);
 
             if ($formvalid){
-                $filename = $this->request->getVar('filename');
                 $kodeanggota = $this->request->getVar('kodeanggota');
                 $username = $this->request->getVar('username');
-                $member_tingkat = $this->request->getVar('member_tingkat');
                 $namalengkap = $this->request->getVar('namalengkap');
-                $newpass = $this->request->getFile('newpass');
+                $newpass = $this->request->getVar('newpass');
                 $status = $this->request->getVar('status');
+                $superadmin = $this->request->getVar('superadmin') == "yes" ? "y" : "n";
+                $admin = $this->request->getVar('admin') == "yes" ? "y" : "n";
+                $anggota = $this->request->getVar('anggota') == "yes" ? "y" : "n";
+                $calon = $this->request->getVar('calon') == "yes" ? "y" : "n";
+                $tipe_user = $superadmin.$admin.$anggota.$calon;
+                $kehormatan = $this->request->getVar('kehormatan');
+                $confirm = $this->request->getVar('confirm');
 
-                $ext = $newpass->getClientExtension();
-                if (!empty($ext)){
-                    $filename = $kodeanggota.'_'.str_replace(' ', '', $username).'_skmemberdpp.'.$ext;
-                    $newpass->move('uploads/docs/',$filename,true);
-                }else{
-                    $filename = $filename;
-                }
-    
-                $data = array(
+                if (!empty($newpass)){
+                $datauser = array(
                     'kodeanggota' => $kodeanggota,
                     'username' => $username,
-                    'member_tingkat' => $member_tingkat,
                     'namalengkap' => $namalengkap,
-                    'newpass' => $filename,
+                    'password' => password_hash($newpass, PASSWORD_DEFAULT),
                     'status' => $status,
+                    'type' => $tipe_user,
+                    'kehormatan' => $kehormatan,
+                    'confirm' => $confirm,
+                    'softdelete' => 'Tidak',
                     'datamodified' => date('Y-m-d')
                 );
+                }else{
+                    $datauser = array(
+                        'kodeanggota' => $kodeanggota,
+                        'username' => $username,
+                        'namalengkap' => $namalengkap,
+                        'status' => $status,
+                        'type' => $tipe_user,
+                        'kehormatan' => $kehormatan,
+                        'confirm' => $confirm,
+                        'softdelete' => 'Tidak',
+                        'datamodified' => date('Y-m-d')
+                    );                    
+                }
     
-                $model->update($user_id, $data); 
+                $model->update($user_id, $datauser); 
     
-                return redirect()->to('/manmember');
+                return redirect()->to('/mananggota');
             }else{
                 $member = $model->where('user_id', $user_id)->first();
                 if ($member){
@@ -267,23 +288,74 @@ class Mananggota extends BaseController
                         'user_id' => $member['user_id'],
                         'kodeanggota' => $member['kodeanggota'],
                         'username' => $member['username'],
-                        'member_tingkat' => $member['member_tingkat'],
                         'namalengkap' => $member['namalengkap'],
-                        'newpass' => $member['newpass'],
-                        'status' => $member['status']
+                        'status' => $member['status'],
+                        'type' => $member['type'],
+                        'kehormatan' => $member['kehormatan'],
+                        'confirm' => $member['confirm']
                     ];
                 }
                 $data['role'] = $session->get('role');
                 $data['tipe_user'] = $session->get('tipe_user');
                 $data['confirm'] = $session->get('confirm');
                 $data['title'] = "Sistem Informasi Anggota ICHI";
-                $data['page_title'] = "Ubah Data member / DPP ICHI";
-                $data['data_bread'] = "Ubah Data member / DPP";
+                $data['page_title'] = "Ubah Data Anggota ICHI";
+                $data['data_bread'] = "Ubah Data Anggota";
                 $data['logged_in'] = $session->get('logged_in');
                 $data['user_id'] = $session->get('user_id');
                 $data['validation'] = $this->validator;
                 return view('member/ubahmember', $data);
             }
         }        
+    }
+
+    public function profile($id){
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $profile = new DiriModel();
+        $dataprofile = $profile->where('user_id', $id)->first();
+        $kerja = new KerjaModel();
+        $datakerja = $kerja->where('user_id', $id)->order_by('kerja_id', 'DESC')->findAll();
+        $org = new OrgModel();
+        $dataorg = $org->where('user_id', $id)->order_by('org_id', 'DESC')->findAll();
+        $pend = new PendModel();
+        $datapend = $pend->where('user_id', $id)->order_by('pend_id', 'DESC')->findAll();
+        $pub = new PubModel();
+        $datapub = $pub->where('user_id', $id)->order_by('pub_id', 'DESC')->findAll();
+
+        if (!empty($dataprofile)){
+            $data['info_profile'] = $dataprofile;
+        }else{
+            $data['info_profile'] = "Data kosong";
+        }
+        if (!empty($datakerja)){
+            $data['info_kerja'] = $datakerja;
+        }else{
+            $data['info_kerja'] = "Data kosong";
+        }
+        if (!empty($dataorg)){
+            $data['info_org'] = $dataorg;
+        }else{
+            $data['info_org'] = "Data kosong";
+        }
+        if (!empty($datapend)){
+            $data['info_pend'] = $datapend;
+        }else{
+            $data['info_pend'] = "Data kosong";
+        }
+        if (!empty($datapub)){
+            $data['info_pub'] = $datapub;
+        }else{
+            $data['info_pub'] = "Data kosong";
+        }
+
+        $data['role'] = $session->get('role');
+        $data['tipe_user'] = $session->get('tipe_user');
+        $data['confirm'] = $session->get('confirm');
+        $data['title'] = "Sistem Informasi Anggota ICHI";
+        $data['page_title'] = "Profile Anggota ICHI";
+        $data['data_bread'] = "Profile Anggota";
+        $data['logged_in'] = $session->get('logged_in');
+        return view('member/profilemember', $data);
     }
 }

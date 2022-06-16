@@ -45,6 +45,7 @@
                             <th>Kode Anggota</th>
                             <th>Username</th>
                             <th>Nama Lengkap</th>
+                            <th>Regional</th>
                             <th>status</th>
                             <th>Tipe Anggota</th>
                             <th>Kehormatan</th>
@@ -64,6 +65,7 @@
                                     href="<?= base_url();?>/mananggota/profile/<?= $member['user_id'];?>"><?= $member['username'];?></a>
                             </td>
                             <td><?= $member['namalengkap'];?></td>
+                            <td><?= $member['dpr_nama'];?></td>
                             <td><?php
                             switch ($member['status']){
                                 case "aktif":
