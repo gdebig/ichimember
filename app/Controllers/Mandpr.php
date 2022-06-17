@@ -19,6 +19,7 @@ class Mandpr extends BaseController
         }else{
             $data['info_dpr'] = 'kosong';
         }
+        $data['user_id'] = $session->get('user_id');
         $data['role'] = $session->get('role');
         $data['tipe_user'] = $session->get('tipe_user');
         $data['confirm'] = $session->get('confirm');
@@ -83,6 +84,13 @@ class Mandpr extends BaseController
                     'errors' => [
                         'required' => 'Field Tanggal Akhir SK harus diisi.',
                     ],
+                ],
+                'email' => [
+                    'label'  => 'Email Resmi',
+                    'rules'  => 'valid_email',
+                    'errors' => [
+                        'valid_email' => 'Field Email Resmi harus diisi dengan format email yang benar.',
+                    ],
                 ]
             ]);
 
@@ -93,6 +101,9 @@ class Mandpr extends BaseController
                 $nosk = $this->request->getVar('nosk');
                 $file_sk = $this->request->getFile('file_sk');
                 $expired = $this->request->getVar('expired');
+                $alamat = $this->request->getVar('alamat');
+                $email = $this->request->getVar('email');
+                $notelp = $this->request->getVar('notelp');
 
                 $ext = $file_sk->getClientExtension();
                 if (!empty($ext)){
@@ -146,23 +157,27 @@ class Mandpr extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $model = new DprModel();
-        $org = $model->where('dpr_id', $id)->first();
-        if ($org){
+        $dpr = $model->where('dpr_id', $id)->first();
+        if ($dpr){
             $data = [
-                'dpr_id' => $org['dpr_id'],
-                'kodedpr' => $org['kodedpr'],
-                'dpr_nama' => $org['dpr_nama'],
-                'dpr_tingkat' => $org['dpr_tingkat'],
-                'nosk' => $org['nosk'],
-                'file_sk' => $org['file_sk'],
-                'expired' => $org['expired']
+                'dpr_id' => $dpr['dpr_id'],
+                'kodedpr' => $dpr['kodedpr'],
+                'dpr_nama' => $dpr['dpr_nama'],
+                'dpr_tingkat' => $dpr['dpr_tingkat'],
+                'nosk' => $dpr['nosk'],
+                'file_sk' => $dpr['file_sk'],
+                'expired' => $dpr['expired'],
+                'alamat' => $dpr['alamat'],
+                'email' => $dpr['email'],
+                'notelp' => $dpr['notelp']
             ];
         }
+        $data['user_id'] = $session->get('user_id');
         $data['role'] = $session->get('role');
         $data['tipe_user'] = $session->get('tipe_user');
         $data['confirm'] = $session->get('confirm');
         $data['title'] = "Sistem Informasi Anggota ICHI";
-        $data['page_title'] = "Ubah Data DPR / DPP Anggota ICHI";
+        $data['page_title'] = "Ubah Data DPR / DPP ICHI";
         $data['data_bread'] = "Ubah Data DPR/DPP";
         $data['logged_in'] = $session->get('logged_in');
         return view('member/ubahdpr', $data);
@@ -209,6 +224,13 @@ class Mandpr extends BaseController
                     'errors' => [
                         'required' => 'Field Tanggal Akhir SK harus diisi.',
                     ],
+                ],
+                'email' => [
+                    'label'  => 'Email Resmi',
+                    'rules'  => 'valid_email',
+                    'errors' => [
+                        'valid_email' => 'Field Email Resmi harus diisi dengan format email yang benar.',
+                    ],
                 ]
             ]);
 
@@ -220,6 +242,9 @@ class Mandpr extends BaseController
                 $nosk = $this->request->getVar('nosk');
                 $file_sk = $this->request->getFile('file_sk');
                 $expired = $this->request->getVar('expired');
+                $alamat = $this->request->getVar('alamat');
+                $email = $this->request->getVar('email');
+                $notelp = $this->request->getVar('notelp');
 
                 $ext = $file_sk->getClientExtension();
                 if (!empty($ext)){
@@ -236,6 +261,9 @@ class Mandpr extends BaseController
                     'nosk' => $nosk,
                     'file_sk' => $filename,
                     'expired' => $expired,
+                    'alamat' => $alamat,
+                    'email' => $email,
+                    'notelp' => $notelp,
                     'datamodified' => date('Y-m-d')
                 );
     
@@ -243,16 +271,19 @@ class Mandpr extends BaseController
     
                 return redirect()->to('/mandpr');
             }else{
-                $org = $model->where('dpr_id', $dpr_id)->first();
-                if ($org){
+                $dpr = $model->where('dpr_id', $dpr_id)->first();
+                if ($dpr){
                     $data = [
-                        'dpr_id' => $org['dpr_id'],
-                        'kodedpr' => $org['kodedpr'],
-                        'dpr_nama' => $org['dpr_nama'],
-                        'dpr_tingkat' => $org['dpr_tingkat'],
-                        'nosk' => $org['nosk'],
-                        'file_sk' => $org['file_sk'],
-                        'expired' => $org['expired']
+                        'dpr_id' => $dpr['dpr_id'],
+                        'kodedpr' => $dpr['kodedpr'],
+                        'dpr_nama' => $dpr['dpr_nama'],
+                        'dpr_tingkat' => $dpr['dpr_tingkat'],
+                        'nosk' => $dpr['nosk'],
+                        'file_sk' => $dpr['file_sk'],
+                        'expired' => $dpr['expired'],
+                        'alamat' => $dpr['alamat'],
+                        'email' => $dpr['email'],
+                        'notelp' => $dpr['notelp']
                     ];
                 }
                 $data['role'] = $session->get('role');

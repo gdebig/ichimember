@@ -136,7 +136,7 @@ class Home extends BaseController
             $model = new UserModel();
             $username = $this->request->getVar('email');
             $password = $this->request->getVar('password');
-            $data = $model->where('username', $username)->where('status','aktif')->first();
+            $data = $model->where('username', $username)->where('status','aktif')->where('softdelete','Tidak')->first();
             if($data){
                 $pass = $data['password'];
                 $verify_pass = password_verify($password, $pass);
@@ -149,6 +149,7 @@ class Home extends BaseController
                     $ses_data = [
                         'user_id'           => $data['user_id'],
                         'username'          => $data['username'],
+                        'dpr_id'            => $data['dpr_id'],
                         'status'            => $data['status'],
                         'tipe_user'         => $data['type'],
                         'confirm'           => $data['confirm'],

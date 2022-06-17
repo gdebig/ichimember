@@ -48,6 +48,7 @@
                             <th>Nomor SK</th>
                             <th>File SK</th>
                             <th>Batas Waktu SK</th>
+                            <th>Alamat dan Nomor Kontak</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -64,6 +65,9 @@
                             <td><?= $dpr['nosk'];?></td>
                             <td><?= $dpr['file_sk'];?></td>
                             <td><?= $dpr['expired'];?></td>
+                            <td><?php
+                            echo $dpr['alamat']."<br />Email Resmi: ".$dpr['email']."<br />No Telepon: ".$dpr['notelp'];
+                            ?></td>
                             <td style="text-align: center"><a
                                     href="<?php echo base_url();?>/mandpr/ubahdpr/<?=$dpr['dpr_id'];?>"
                                     class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>

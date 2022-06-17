@@ -25,6 +25,29 @@
                             placeholder="Kode Anggota..." value="<?= set_value('kodeanggota');?>" />
                     </div>
                     <br />
+                    <?php
+                    if ($role=="superadmin"){
+                    ?>
+                    <label for="dpr_id" class="element">Regional <span class="required">
+                            *</span>&nbsp;
+                    </label>
+                    <div class="element">
+                        <select name="dpr_id" id="dpr_id" class="form-control">
+                            <?php
+                            foreach ($data_dpr as $dpr) : 
+                            ?>
+                            <option value="<?= $dpr['dpr_id'];?>"
+                                <?= set_value('dpr_id')==$dpr['dpr_id'] ? "selected" : "";?>><?= $dpr['dpr_nama'];?>
+                            </option>
+                            <?php
+                            endforeach
+                            ?>
+                        </select>
+                    </div>
+                    <br />
+                    <?php
+                    }
+                    ?>
                     <label for="username" class="element">Username (Email) <span class="required">
                             *</span>&nbsp;</label>
                     <div class="element">
@@ -65,11 +88,17 @@
                     <br />
                     <label for="type" class="element">Tipe User</label>
                     <div class="element">
+                        <?php
+                        if ($role=="superadmin"){
+                        ?>
                         <div class="custom-control custom-checkbox">
                             <input class="custom-control-input" type="checkbox" id="superadmin" name="superadmin"
                                 value="yes" <?= set_value('superadmin')=='yes' ? 'checked="checked"':""?>>
                             <label for="superadmin" class="custom-control-label">Super Admin</label>
                         </div>
+                        <?php
+                        }
+                        ?>
                         <div class="custom-control custom-checkbox">
                             <input class="custom-control-input" type="checkbox" id="admin" name="admin" value="yes"
                                 <?= set_value('admin')=='yes' ? 'checked="checked"':""?>>

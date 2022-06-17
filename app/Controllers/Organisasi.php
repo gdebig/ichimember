@@ -20,6 +20,7 @@ class Organisasi extends BaseController
         }else{
             $data['info_org'] = 'kosong';
         }
+        $data['user_id'] = $user_id;
         $data['role'] = $session->get('role');
         $data['tipe_user'] = $session->get('tipe_user');
         $data['confirm'] = $session->get('confirm');
@@ -132,6 +133,7 @@ class Organisasi extends BaseController
                 'thnakhir' => $org['thnakhir']
             ];
         }
+        $data['user_id'] = $session->get('user_id');
         $data['role'] = $session->get('role');
         $data['tipe_user'] = $session->get('tipe_user');
         $data['confirm'] = $session->get('confirm');
@@ -201,6 +203,7 @@ class Organisasi extends BaseController
                         'thnakhir' => $org['thnakhir']
                     ];
                 }
+                $data['user_id'] = $user_id;
                 $data['role'] = $session->get('role');
                 $data['tipe_user'] = $session->get('tipe_user');
                 $data['confirm'] = $session->get('confirm');

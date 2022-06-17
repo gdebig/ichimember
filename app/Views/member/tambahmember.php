@@ -25,6 +25,27 @@
                             placeholder="Kode Anggota..." />
                     </div>
                     <br />
+                    <?php
+                    if ($role=="superadmin"){
+                    ?>
+                    <label for="dpr_id" class="element">Regional <span class="required">
+                            *</span>&nbsp;
+                    </label>
+                    <div class="element">
+                        <select name="dpr_id" id="dpr_id" class="form-control">
+                            <?php
+                            foreach ($data_dpr as $dpr) : 
+                            ?>
+                            <option value="<?= $dpr['dpr_id'];?>"><?= $dpr['dpr_nama'];?></option>
+                            <?php
+                            endforeach
+                            ?>
+                        </select>
+                    </div>
+                    <br />
+                    <?php
+                    }
+                    ?>
                     <label for="username" class="element">Username (Email) <span class="required">
                             *</span>&nbsp;</label>
                     <div class="element">
@@ -63,11 +84,17 @@
                     <br />
                     <label for="type" class="element">Tipe User</label>
                     <div class="element">
+                        <?php
+                        if ($role=="superadmin"){
+                        ?>
                         <div class="custom-control custom-checkbox">
                             <input class="custom-control-input" type="checkbox" id="superadmin" name="superadmin"
                                 value="yes">
                             <label for="superadmin" class="custom-control-label">Super Admin</label>
                         </div>
+                        <?php
+                        }
+                        ?>
                         <div class="custom-control custom-checkbox">
                             <input class="custom-control-input" type="checkbox" id="admin" name="admin" value="yes">
                             <label for="admin" class="custom-control-label">Admin</label>

@@ -9,6 +9,7 @@ use App\Models\OrgModel;
 use App\Models\PendModel;
 use App\Models\PengModel;
 use App\Models\PubModel;
+use App\Models\DprModel;
 
 class Anggota extends BaseController
 {
@@ -62,7 +63,6 @@ class Anggota extends BaseController
             $data = [
                 'diri_id' => $user['diri_id'],
                 'user_id' => $user['user_id'],
-                'dpr_id' => $user['dpr_id'],
                 'tempatlahir' => $user['tempatlahir'],
                 'tanggallahir' => $user['tanggallahir'],
                 'gender' => $user['gender'],
@@ -83,6 +83,7 @@ class Anggota extends BaseController
         }else{
             $data['kosong'] = "kosong";
         }
+        $data['user_id'] = $session->get('user_id');
         $data['confirm'] = $session->get('confirm');
         $data['role'] = $session->get('role');
         $data['tipe_user'] = $session->get('tipe_user');
@@ -417,7 +418,6 @@ class Anggota extends BaseController
         $data = array(
             'diri_id' => $datadiri['diri_id'],
             'user_id' => $datadiri['user_id'],
-            'dpr_id' => $datadiri['dpr_id'],
             'tempatlahir' => $datadiri['tempatlahir'],
             'tanggallahir' => $datadiri['tanggallahir'],
             'gender' => $datadiri['gender'],
@@ -672,7 +672,6 @@ class Anggota extends BaseController
                 $data = array(
                     'diri_id' => $datadiri['diri_id'],
                     'user_id' => $datadiri['user_id'],
-                    'dpr_id' => $datadiri['dpr_id'],
                     'tempatlahir' => $datadiri['tempatlahir'],
                     'tanggallahir' => $datadiri['tanggallahir'],
                     'gender' => $datadiri['gender'],

@@ -20,6 +20,7 @@ class Pendidikan extends BaseController
         }else{
             $data['data_pend'] = 'kosong';
         }
+        $data['user_id'] = $session->get('user_id');
         $data['role'] = $session->get('role');
         $data['tipe_user'] = $session->get('tipe_user');
         $data['confirm'] = $session->get('confirm');

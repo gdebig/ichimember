@@ -8,6 +8,7 @@ use App\Models\OrgModel;
 use App\Models\PendModel;
 use App\Models\PubModel;
 use App\Models\UserModel;
+use App\Models\DprModel;
 
 class Mananggota extends BaseController
 {
@@ -16,14 +17,21 @@ class Mananggota extends BaseController
         $session = session();
         $user_id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
+        $role = $session->get('role');
+        $dpr_id = $session->get('dpr_id');
         $model = new UserModel();
         $data['logged_in'] = $logged_in;
-        $member = $model->where('tbl_user.softdelete', 'Tidak')->join('tbl_datadiri', 'tbl_user.user_id = tbl_datadiri.user_id', 'left')->join('tbl_dpr', 'tbl_datadiri.dpr_id = tbl_dpr.dpr_id', 'left')->orderby('tbl_user.user_id','DESC')->findall();
+        if ($role=="superadmin"){
+            $member = $model->where('tbl_user.softdelete', 'Tidak')->join('tbl_dpr', 'tbl_user.dpr_id = tbl_dpr.dpr_id', 'left')->orderby('tbl_user.user_id','DESC')->findall();
+        }elseif($role=="admin"){
+            $member = $model->where('tbl_user.softdelete', 'Tidak')->where('tbl_user.dpr_id', $dpr_id)->join('tbl_dpr', 'tbl_user.dpr_id = tbl_dpr.dpr_id', 'left')->orderby('tbl_user.user_id','DESC')->findall();            
+        }
         if (!empty($member)){
             $data['info_member'] = $member;
         }else{
             $data['info_member'] = 'kosong';
         }
+        $data['user_id'] = $user_id;
         $data['role'] = $session->get('role');
         $data['tipe_user'] = $session->get('tipe_user');
         $data['confirm'] = $session->get('confirm');
@@ -37,6 +45,8 @@ class Mananggota extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $user_id = $session->get('user_id');
+        $model = new DprModel();
+        $data['data_dpr'] = $model->orderby('dpr_id', 'ASC')->findAll();
         $data['role'] = $session->get('role');
         $data['tipe_user'] = $session->get('tipe_user');
         $data['confirm'] = $session->get('confirm');
@@ -105,7 +115,10 @@ class Mananggota extends BaseController
             ]);
 
             if ($formvalid){
+                $role = $session->get('role');
+
                 $kodeanggota = $this->request->getVar('kodeanggota');
+                $dpr_id = $this->request->getVar('dpr_id');
                 $username = $this->request->getVar('username');
                 $namalengkap = $this->request->getVar('namalengkap');
                 $newpass = $this->request->getVar('newpass');
@@ -114,12 +127,17 @@ class Mananggota extends BaseController
                 $admin = $this->request->getVar('admin') == "yes" ? "y" : "n";
                 $anggota = $this->request->getVar('anggota') == "yes" ? "y" : "n";
                 $calon = $this->request->getVar('calon') == "yes" ? "y" : "n";
-                $tipe_user = $superadmin.$admin.$anggota.$calon;
+                if ($role=="superadmin"){
+                    $tipe_user = $superadmin.$admin.$anggota.$calon;
+                }elseif($role=="admin"){
+                    $tipe_user = 'n'.$admin.$anggota.$calon;
+                }
                 $kehormatan = $this->request->getVar('kehormatan');
                 $confirm = $this->request->getVar('confirm');
     
                 $data = array(
                     'kodeanggota' => $kodeanggota,
+                    'dpr_id' => $dpr_id,
                     'username' => $username,
                     'namalengkap' => $namalengkap,
                     'password' => password_hash($newpass, PASSWORD_DEFAULT),
@@ -136,6 +154,8 @@ class Mananggota extends BaseController
     
                 return redirect()->to('/mananggota');
             }else{
+                $model1 = new DprModel();
+                $data['data_dpr'] = $model1->orderby('dpr_id', 'ASC')->findAll();
                 $data['role'] = $session->get('role');
                 $data['tipe_user'] = $session->get('tipe_user');
                 $data['confirm'] = $session->get('confirm');
@@ -173,6 +193,7 @@ class Mananggota extends BaseController
             $data = [
                 'user_id' => $member['user_id'],
                 'kodeanggota' => $member['kodeanggota'],
+                'dpr_id' => $member['dpr_id'],
                 'username' => $member['username'],
                 'namalengkap' => $member['namalengkap'],
                 'status' => $member['status'],
@@ -181,6 +202,8 @@ class Mananggota extends BaseController
                 'confirm' => $member['confirm']
             ];
         }
+        $model1 = new DprModel();
+        $data['data_dpr'] = $model1->orderby('dpr_id', 'ASC')->findAll();
         $data['role'] = $session->get('role');
         $data['tipe_user'] = $session->get('tipe_user');
         $data['confirm'] = $session->get('confirm');
@@ -195,6 +218,7 @@ class Mananggota extends BaseController
         $session = session();
         $model = new UserModel();
         $logged_in = $session->get('logged_in');
+        $role = $session->get('role');
         $user_id = $this->request->getVar('user_id');
         $button=$this->request->getVar('submit');
         
@@ -239,6 +263,7 @@ class Mananggota extends BaseController
 
             if ($formvalid){
                 $kodeanggota = $this->request->getVar('kodeanggota');
+                $dpr_id = $this->request->getVar('dpr_id');
                 $username = $this->request->getVar('username');
                 $namalengkap = $this->request->getVar('namalengkap');
                 $newpass = $this->request->getVar('newpass');
@@ -247,13 +272,18 @@ class Mananggota extends BaseController
                 $admin = $this->request->getVar('admin') == "yes" ? "y" : "n";
                 $anggota = $this->request->getVar('anggota') == "yes" ? "y" : "n";
                 $calon = $this->request->getVar('calon') == "yes" ? "y" : "n";
-                $tipe_user = $superadmin.$admin.$anggota.$calon;
+                if ($role=="superadmin"){
+                    $tipe_user = $superadmin.$admin.$anggota.$calon;
+                }elseif($role=="admin"){
+                    $tipe_user = 'n'.$admin.$anggota.$calon;
+                }
                 $kehormatan = $this->request->getVar('kehormatan');
                 $confirm = $this->request->getVar('confirm');
 
                 if (!empty($newpass)){
                 $datauser = array(
                     'kodeanggota' => $kodeanggota,
+                    'dpr_id' => $dpr_id,
                     'username' => $username,
                     'namalengkap' => $namalengkap,
                     'password' => password_hash($newpass, PASSWORD_DEFAULT),
@@ -267,6 +297,7 @@ class Mananggota extends BaseController
                 }else{
                     $datauser = array(
                         'kodeanggota' => $kodeanggota,
+                        'dpr_id' => $dpr_id,
                         'username' => $username,
                         'namalengkap' => $namalengkap,
                         'status' => $status,
@@ -286,6 +317,7 @@ class Mananggota extends BaseController
                 if ($member){
                     $data = [
                         'user_id' => $member['user_id'],
+                        'dpr_id' => $member['dpr_id'],
                         'kodeanggota' => $member['kodeanggota'],
                         'username' => $member['username'],
                         'namalengkap' => $member['namalengkap'],
@@ -295,6 +327,8 @@ class Mananggota extends BaseController
                         'confirm' => $member['confirm']
                     ];
                 }
+                $model1 = new DprModel();
+                $data['data_dpr'] = $model1->orderby('dpr_id', 'ASC')->findAll();
                 $data['role'] = $session->get('role');
                 $data['tipe_user'] = $session->get('tipe_user');
                 $data['confirm'] = $session->get('confirm');
@@ -312,17 +346,25 @@ class Mananggota extends BaseController
     public function profile($id){
         $session = session();
         $logged_in = $session->get('logged_in');
+        $member = new UserModel();
+        $datamember = $member->where('user_id', $id)->first();
         $profile = new DiriModel();
         $dataprofile = $profile->where('user_id', $id)->first();
         $kerja = new KerjaModel();
-        $datakerja = $kerja->where('user_id', $id)->order_by('kerja_id', 'DESC')->findAll();
+        $datakerja = $kerja->where('user_id', $id)->orderby('kerja_id', 'DESC')->findAll();
         $org = new OrgModel();
-        $dataorg = $org->where('user_id', $id)->order_by('org_id', 'DESC')->findAll();
+        $dataorg = $org->where('user_id', $id)->orderby('org_id', 'DESC')->findAll();
         $pend = new PendModel();
-        $datapend = $pend->where('user_id', $id)->order_by('pend_id', 'DESC')->findAll();
+        $datapend = $pend->where('user_id', $id)->orderby('pend_id', 'DESC')->findAll();
         $pub = new PubModel();
-        $datapub = $pub->where('user_id', $id)->order_by('pub_id', 'DESC')->findAll();
+        $datapub = $pub->where('user_id', $id)->orderby('pub_id', 'DESC')->findAll();
 
+        helper(['tanggal']);
+        if (!empty($datamember)){
+            $data['info_member'] = $datamember;
+        }else{
+            $data['info_member'] = "Data kosong";
+        }
         if (!empty($dataprofile)){
             $data['info_profile'] = $dataprofile;
         }else{
@@ -349,6 +391,7 @@ class Mananggota extends BaseController
             $data['info_pub'] = "Data kosong";
         }
 
+        $data['user_id'] = $id;
         $data['role'] = $session->get('role');
         $data['tipe_user'] = $session->get('tipe_user');
         $data['confirm'] = $session->get('confirm');

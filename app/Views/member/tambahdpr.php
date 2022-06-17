@@ -67,6 +67,23 @@
                             placeholder="Tanggal Akhir SK..." />
                     </div>
                     <br />
+                    <label for="alamat" class="element">Alamat Kantor</label>
+                    <div class="element">
+                        <textarea name="alamat" id="alamat" class="form-control"
+                            placeholder="Alamat Kantor..."></textarea>
+                    </div>
+                    <br />
+                    <label for="email" class="element">Email Resmi</label>
+                    <div class="element">
+                        <input id="email" name="email" class="form-control" type="text" placeholder="Email..." />
+                    </div>
+                    <br />
+                    <label for="notelp" class="element">Nomor Telepon</label>
+                    <div class="element">
+                        <input id="notelp" name="notelp" class="form-control" type="text"
+                            placeholder="Nomor Telepon..." />
+                    </div>
+                    <br />
                     <div class="form-group">
                         <label>Field bertanda * harus diisi.</label>
                     </div>

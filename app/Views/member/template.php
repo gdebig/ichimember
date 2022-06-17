@@ -206,6 +206,12 @@
                                         &nbsp;&nbsp;<p>Manajemen Anggota</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url();?>/infodpr" class="nav-link">
+                                        <i class="fas fa-info-circle"></i>
+                                        &nbsp;&nbsp;<p>Manajemen Info DPR</p>
+                                    </a>
+                                </li>
                                 <?php
                                 }
                                 ?>
@@ -223,6 +229,12 @@
                                 <?php
                                     }
                                 ?>
+                                <li class="nav-item">
+                                    <a href="<?= base_url();?>/anggota/ubahpass/<?= $user_id;?>" class="nav-link">
+                                        <i class="fas fa-key nav-icon"></i>
+                                        <p>Ubah Password</p>
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url();?>/home/logout" class="nav-link">
                                         <i class="fas fa-sign-out-alt nav-icon"></i>
@@ -355,7 +367,7 @@
     <script src="<?php echo base_url();?>/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <script>
     $(function() {
-        $('#tabledata').DataTable({
+        $('table.table').DataTable({
             "paging": true,
             "lengthChange": false,
             "searching": true,
