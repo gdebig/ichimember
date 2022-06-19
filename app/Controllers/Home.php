@@ -2,7 +2,13 @@
 
 namespace App\Controllers;
 
+use App\Models\DiriModel;
+use App\Models\KerjaModel;
+use App\Models\OrgModel;
+use App\Models\PendModel;
+use App\Models\PubModel;
 use App\Models\UserModel;
+use App\Models\DprModel;
 
 class Home extends BaseController
 {
@@ -10,6 +16,14 @@ class Home extends BaseController
     {
         $session = session();
         $logged_in = $session->get('logged_in');
+        $model = new UserModel();
+        $where = 'tbl_user.type LIKE "__y_"';
+        $member = $model->select('tbl_user.user_id, tbl_user.namalengkap, tbl_datadiri.foto, tbl_datadiri.alamat, tbl_datadiri.notelp, tbl_datadiri.email, tbl_datadiri.bagidata, tbl_datadiri.keahlian, tbl_datadiri.tempatkerja, tbl_datadiri.alamatkerja, tbl_datadiri.telpkerja, tbl_datadiri.emailkerja, tbl_dpr.dpr_nama')->where('softdelete','Tidak')->where('status', 'aktif')->where($where)->join('tbl_datadiri', 'tbl_user.user_id=tbl_datadiri.user_id','left')->join('tbl_dpr', 'tbl_user.dpr_id=tbl_dpr.dpr_id','left')->orderby('tbl_user.user_id','RANDOM')->limit(9)->find();
+        if(!empty($member)){
+            $data['info_member'] = $member;
+        }else{
+            $data['info_member'] = "kosong";
+        }
         $data['role'] = $session->get('role');
         $data['tipe_user'] = $session->get('tipe_user');
         $data['logged_in'] = $logged_in;
@@ -22,6 +36,8 @@ class Home extends BaseController
     {
         $session = session();
         $logged_in = $session->get('logged_in');
+        $model = new DprModel();
+        $data['data_dpr'] = $model->findAll();
         $data['logged_in'] = $logged_in;
         $data['title'] = "Sistem Informasi Anggota ICHI";
         $data['page_title'] = "Daftar Anggota ICHI";
@@ -81,11 +97,13 @@ class Home extends BaseController
 
             if ($formvalid){
 
+                $dpr_id = $this->request->getVar('dpr_id');
                 $username = $this->request->getVar('email');
                 $newpass = $this->request->getVar('newpass');
                 $namalengkap = $this->request->getVar('namalengkap');
 
                 $datauser = array(
+                    'dpr_id' => $dpr_id,
                     'username' => $username,
                     'password' => password_hash($newpass, PASSWORD_DEFAULT),
                     'namalengkap' => $namalengkap,
@@ -199,4 +217,110 @@ class Home extends BaseController
         $session->destroy();
         return redirect()->to('/home');
     }
+
+    public function lihatprofile($id){
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $member = new UserModel();
+        $datamember = $member->where('user_id', $id)->join('tbl_dpr', 'tbl_user.dpr_id=tbl_dpr.dpr_id', 'left')->first();
+        $profile = new DiriModel();
+        $dataprofile = $profile->where('user_id', $id)->first();
+        $kerja = new KerjaModel();
+        $datakerja = $kerja->where('user_id', $id)->orderby('kerja_id', 'DESC')->findAll();
+        $org = new OrgModel();
+        $dataorg = $org->where('user_id', $id)->orderby('org_id', 'DESC')->findAll();
+        $pend = new PendModel();
+        $datapend = $pend->where('user_id', $id)->orderby('pend_id', 'DESC')->findAll();
+        $pub = new PubModel();
+        $datapub = $pub->where('user_id', $id)->orderby('pub_id', 'DESC')->findAll();
+
+        helper(['tanggal']);
+        if (!empty($datamember)){
+            $data['info_member'] = $datamember;
+        }else{
+            $data['info_member'] = "Data kosong";
+        }
+        if (!empty($dataprofile)){
+            $data['info_profile'] = $dataprofile;
+        }else{
+            $data['info_profile'] = "Data kosong";
+        }
+        if (!empty($datakerja)){
+            $data['info_kerja'] = $datakerja;
+        }else{
+            $data['info_kerja'] = "Data kosong";
+        }
+        if (!empty($dataorg)){
+            $data['info_org'] = $dataorg;
+        }else{
+            $data['info_org'] = "Data kosong";
+        }
+        if (!empty($datapend)){
+            $data['info_pend'] = $datapend;
+        }else{
+            $data['info_pend'] = "Data kosong";
+        }
+        if (!empty($datapub)){
+            $data['info_pub'] = $datapub;
+        }else{
+            $data['info_pub'] = "Data kosong";
+        }
+
+        $data['user_id'] = $id;
+        $data['role'] = $session->get('role');
+        $data['tipe_user'] = $session->get('tipe_user');
+        $data['confirm'] = $session->get('confirm');
+        $data['title'] = "Sistem Informasi Anggota ICHI";
+        $data['page_title'] = "Profile Anggota ICHI";
+        $data['data_bread'] = "Profile Anggota";
+        $data['logged_in'] = $session->get('logged_in');
+        return view('main/profilemember', $data);
+    }
+    
+    public function anggota()
+    {
+        $session = session();
+        $user_id = $session->get('user_id');
+        $logged_in = $session->get('logged_in');
+        $role = $session->get('role');
+        $dpr_id = $session->get('dpr_id');
+        $model = new UserModel();
+        $data['logged_in'] = $logged_in;
+        $where = 'tbl_user.type LIKE "__y_"';
+        $member = $model->select('tbl_user.user_id, tbl_user.kodeanggota, tbl_user.namalengkap, tbl_dpr.dpr_nama, tbl_datadiri.keahlian')->where('tbl_user.status','aktif')->where('tbl_user.softdelete', 'Tidak')->where($where)->join('tbl_dpr', 'tbl_user.dpr_id = tbl_dpr.dpr_id', 'left')->join('tbl_datadiri', 'tbl_user.user_id = tbl_datadiri.user_id', 'left')->orderby('tbl_user.user_id','DESC')->findall();
+        if (!empty($member)){
+            $data['info_member'] = $member;
+        }else{
+            $data['info_member'] = 'kosong';
+        }
+        $data['user_id'] = $user_id;
+        $data['role'] = $session->get('role');
+        $data['tipe_user'] = $session->get('tipe_user');
+        $data['confirm'] = $session->get('confirm');
+        $data['title'] = "Sistem Informasi Anggota ICHI";
+        return view('main/daftaranggota', $data);
+    }
+
+    public function daftardpr()
+    {
+        $session = session();
+        $user_id = $session->get('user_id');
+        $logged_in = $session->get('logged_in');
+        $model = new DprModel();
+        $data['logged_in'] = $logged_in;
+        $dpr = $model->orderby('dpr_id','ASC')->findall();
+        if (!empty($dpr)){
+            $data['info_dpr'] = $dpr;
+        }else{
+            $data['info_dpr'] = 'kosong';
+        }
+        $data['user_id'] = $session->get('user_id');
+        $data['role'] = $session->get('role');
+        $data['tipe_user'] = $session->get('tipe_user');
+        $data['confirm'] = $session->get('confirm');
+        $data['title'] = "Sistem Informasi Anggota ICHI";
+        $data['page_title'] = "Daftar DPP/DPR ICHI";
+        $data['data_bread'] = "Dewan Pengurus";
+        return view('main/daftardpr', $data);
+    }   
 }

@@ -26,6 +26,11 @@
                             <td width="65%"><?= $info_member['namalengkap'];?></td>
                         </tr>
                         <tr>
+                            <td width="30%">Regional</td>
+                            <td width="5%" style="text-align:center">:</td>
+                            <td width="65%"><?= $info_member['dpr_nama'];?></td>
+                        </tr>
+                        <tr>
                             <td width="30%">Tempat & Tanggal Lahir</td>
                             <td width="5%" style="text-align:center">:</td>
                             <td width="65%">
@@ -66,6 +71,66 @@
                             <td width="30%">Keahlian</td>
                             <td width="5%" style="text-align:center">:</td>
                             <td width="65%"><?= $info_profile['keahlian'];?></td>
+                        </tr>
+                        <tr>
+                            <td width="30%">Google Scholar</td>
+                            <td width="5%" style="text-align:center">:</td>
+                            <td width="65%"><?php
+                        if (!empty($info_profile['scholar_id'])){
+                        ?>
+                                <a href="https://scholar.google.com/citations?user=<?= $info_profile['scholar_id'];?>"
+                                    target="_blank"><?= $info_profile['scholar_id'];?></a>
+                                <?php
+                        }else{
+                            echo "Belum ada";
+                        }
+                        ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="30%">Scopus</td>
+                            <td width="5%" style="text-align:center">:</td>
+                            <td width="65%"><?php
+                        if (!empty($info_profile['scopus_id'])){
+                        ?>
+                                <a href="https://www.scopus.com/authid/detail.uri?authorId=<?= $info_profile['scopus_id'];?>"
+                                    target="_blank"><?= $info_profile['scopus_id'];?></a>
+                                <?php
+                        }else{
+                            echo "Belum ada";
+                        }
+                        ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="30%">Orcid ID</td>
+                            <td width="5%" style="text-align:center">:</td>
+                            <td width="65%"><?php
+                        if (!empty($info_profile['orcid_id'])){
+                        ?>
+                                <a href="https://orcid.org/<?= $info_profile['orcid_id'];?>"
+                                    target="_blank"><?= $info_profile['orcid_id'];?></a>
+                                <?php
+                        }else{
+                            echo "Belum ada";
+                        }
+                        ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="30%">Sinta ID</td>
+                            <td width="5%" style="text-align:center">:</td>
+                            <td width="65%"><?php
+                        if (!empty($info_profile['sinta_id'])){
+                        ?>
+                                <a href="https://sinta3.kemdikbud.go.id/authors/profile/<?= $info_profile['sinta_id'];?>"
+                                    target="_blank"><?= $info_profile['sinta_id'];?></a>
+                                <?php
+                        }else{
+                            echo "Belum ada";
+                        }
+                        ?>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

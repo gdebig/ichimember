@@ -35,6 +35,11 @@
                         <td width="65%"><?= $namalengkap;?></td>
                     </tr>
                     <tr>
+                        <td width="30%">Regional</td>
+                        <td width="5%" style="text-align:center">:</td>
+                        <td width="65%"><?= $dpr_nama;?></td>
+                    </tr>
+                    <tr>
                         <td width="30%">Tempat & Tanggal Lahir</td>
                         <td width="5%" style="text-align:center">:</td>
                         <td width="65%"><?= $tempatlahir.", ".format_indo($tanggallahir);?></td>
@@ -74,6 +79,65 @@
                         <td width="30%">Keahlian</td>
                         <td width="5%" style="text-align:center">:</td>
                         <td width="65%"><?= $keahlian;?></td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Google Scholar</td>
+                        <td width="5%" style="text-align:center">:</td>
+                        <td width="65%"><?php
+                        if (!empty($scholar_id)){
+                        ?>
+                            <a href="https://scholar.google.com/citations?user=<?= $scholar_id;?>"
+                                target="_blank"><?= $scholar_id;?></a>
+                            <?php
+                        }else{
+                            echo "Belum ada";
+                        }
+                        ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Scopus</td>
+                        <td width="5%" style="text-align:center">:</td>
+                        <td width="65%"><?php
+                        if (!empty($scopus_id)){
+                        ?>
+                            <a href="https://www.scopus.com/authid/detail.uri?authorId=<?= $scopus_id;?>"
+                                target="_blank"><?= $scopus_id;?></a>
+                            <?php
+                        }else{
+                            echo "Belum ada";
+                        }
+                        ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Orcid ID</td>
+                        <td width="5%" style="text-align:center">:</td>
+                        <td width="65%"><?php
+                        if (!empty($orcid_id)){
+                        ?>
+                            <a href="https://orcid.org/<?= $orcid_id;?>" target="_blank"><?= $orcid_id;?></a>
+                            <?php
+                        }else{
+                            echo "Belum ada";
+                        }
+                        ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Sinta ID</td>
+                        <td width="5%" style="text-align:center">:</td>
+                        <td width="65%"><?php
+                        if (!empty($sinta_id)){
+                        ?>
+                            <a href="https://sinta3.kemdikbud.go.id/authors/profile/<?= $sinta_id;?>"
+                                target="_blank"><?= $sinta_id;?></a>
+                            <?php
+                        }else{
+                            echo "Belum ada";
+                        }
+                        ?>
+                        </td>
                     </tr>
                 </table>
             </div>

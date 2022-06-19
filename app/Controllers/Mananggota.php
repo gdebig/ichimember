@@ -347,7 +347,7 @@ class Mananggota extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $member = new UserModel();
-        $datamember = $member->where('user_id', $id)->first();
+        $datamember = $member->where('user_id', $id)->join('tbl_dpr', 'tbl_user.dpr_id=tbl_dpr.dpr_id', 'left')->first();
         $profile = new DiriModel();
         $dataprofile = $profile->where('user_id', $id)->first();
         $kerja = new KerjaModel();

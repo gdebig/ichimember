@@ -72,6 +72,22 @@
                                                 placeholder="Nama Lengkap..." />
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="dpr_id" class="element">Regional <span class="required">
+                                                *</span>&nbsp;
+                                        </label>
+                                        <div class="element">
+                                            <select name="dpr_id" id="dpr_id" class="form-control">
+                                                <?php
+                                                foreach ($data_dpr as $dpr) : 
+                                                ?>
+                                                <option value="<?= $dpr['dpr_id'];?>"><?= $dpr['dpr_nama'];?></option>
+                                                <?php
+                                                endforeach
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col">
                                             <button type="submit" name="submit" value="submit"

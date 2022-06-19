@@ -1,0 +1,93 @@
+CRITICAL - 2022-06-18 17:14:54 --> Cannot use object of type App\Models\Usermodel as array
+#0 D:\wamp64\www\ichimember\system\View\View.php(210): include()
+#1 D:\wamp64\www\ichimember\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#2 D:\wamp64\www\ichimember\system\Common.php(1089): CodeIgniter\View\View->render('main/dashboard1', Array, true)
+#3 D:\wamp64\www\ichimember\app\Controllers\Home.php(27): view('main/dashboard1', Array)
+#4 D:\wamp64\www\ichimember\system\CodeIgniter.php(832): App\Controllers\Home->index()
+#5 D:\wamp64\www\ichimember\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#6 D:\wamp64\www\ichimember\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\wamp64\www\ichimember\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-06-18 17:16:11 --> Cannot use object of type App\Models\Usermodel as array
+#0 D:\wamp64\www\ichimember\system\View\View.php(210): include()
+#1 D:\wamp64\www\ichimember\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#2 D:\wamp64\www\ichimember\system\Common.php(1089): CodeIgniter\View\View->render('main/dashboard1', Array, true)
+#3 D:\wamp64\www\ichimember\app\Controllers\Home.php(27): view('main/dashboard1', Array)
+#4 D:\wamp64\www\ichimember\system\CodeIgniter.php(832): App\Controllers\Home->index()
+#5 D:\wamp64\www\ichimember\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#6 D:\wamp64\www\ichimember\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\wamp64\www\ichimember\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-06-18 17:16:40 --> Trying to access array offset on value of type null
+#0 D:\wamp64\www\ichimember\app\Views\main\dashboard1.php(37): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'D:\\wamp64\\www\\i...', 37, Array)
+#1 D:\wamp64\www\ichimember\system\View\View.php(210): include('D:\\wamp64\\www\\i...')
+#2 D:\wamp64\www\ichimember\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\ichimember\system\Common.php(1089): CodeIgniter\View\View->render('main/dashboard1', Array, true)
+#4 D:\wamp64\www\ichimember\app\Controllers\Home.php(27): view('main/dashboard1', Array)
+#5 D:\wamp64\www\ichimember\system\CodeIgniter.php(832): App\Controllers\Home->index()
+#6 D:\wamp64\www\ichimember\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 D:\wamp64\www\ichimember\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\ichimember\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-18 17:27:31 --> Undefined index: namalengkap
+#0 D:\wamp64\www\ichimember\app\Views\main\dashboard1.php(56): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'D:\\wamp64\\www\\i...', 56, Array)
+#1 D:\wamp64\www\ichimember\system\View\View.php(210): include('D:\\wamp64\\www\\i...')
+#2 D:\wamp64\www\ichimember\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\ichimember\system\Common.php(1089): CodeIgniter\View\View->render('main/dashboard1', Array, true)
+#4 D:\wamp64\www\ichimember\app\Controllers\Home.php(27): view('main/dashboard1', Array)
+#5 D:\wamp64\www\ichimember\system\CodeIgniter.php(832): App\Controllers\Home->index()
+#6 D:\wamp64\www\ichimember\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 D:\wamp64\www\ichimember\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\ichimember\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-18 18:05:44 --> Class 'App\Controllers\KerjaModel' not found
+#0 D:\wamp64\www\ichimember\system\CodeIgniter.php(832): App\Controllers\Home->lihatprofile('1')
+#1 D:\wamp64\www\ichimember\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#2 D:\wamp64\www\ichimember\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\ichimember\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+ERROR - 2022-06-18 19:02:02 --> Unknown column 'tbl_datadiri.keahlian' in 'field list'
+CRITICAL - 2022-06-18 19:02:02 --> Unknown column 'tbl_datadiri.keahlian' in 'field list'
+#0 D:\wamp64\www\ichimember\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `tbl_use...', 0)
+#1 D:\wamp64\www\ichimember\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `tbl_use...')
+#2 D:\wamp64\www\ichimember\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `tbl_use...')
+#3 D:\wamp64\www\ichimember\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT `tbl_use...', Array, false)
+#4 D:\wamp64\www\ichimember\system\Model.php(183): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\ichimember\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\wamp64\www\ichimember\app\Controllers\Home.php(289): CodeIgniter\BaseModel->findAll()
+#7 D:\wamp64\www\ichimember\system\CodeIgniter.php(832): App\Controllers\Home->anggota()
+#8 D:\wamp64\www\ichimember\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 D:\wamp64\www\ichimember\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\ichimember\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2022-06-18 19:22:33 --> Invalid file: member/daftaranggota.php
+#0 D:\wamp64\www\ichimember\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('member/daftaran...')
+#1 D:\wamp64\www\ichimember\system\Common.php(1089): CodeIgniter\View\View->render('member/daftaran...', Array, true)
+#2 D:\wamp64\www\ichimember\app\Controllers\Home.php(301): view('member/daftaran...', Array)
+#3 D:\wamp64\www\ichimember\system\CodeIgniter.php(832): App\Controllers\Home->anggota()
+#4 D:\wamp64\www\ichimember\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#5 D:\wamp64\www\ichimember\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 D:\wamp64\www\ichimember\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-06-18 19:23:10 --> Invalid file: member/daftaranggota.php
+#0 D:\wamp64\www\ichimember\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('member/daftaran...')
+#1 D:\wamp64\www\ichimember\system\Common.php(1089): CodeIgniter\View\View->render('member/daftaran...', Array, true)
+#2 D:\wamp64\www\ichimember\app\Controllers\Home.php(300): view('member/daftaran...', Array)
+#3 D:\wamp64\www\ichimember\system\CodeIgniter.php(832): App\Controllers\Home->anggota()
+#4 D:\wamp64\www\ichimember\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#5 D:\wamp64\www\ichimember\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 D:\wamp64\www\ichimember\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+ERROR - 2022-06-18 21:37:15 --> Unknown column 'tbl_dpr.expired' in 'where clause'
+CRITICAL - 2022-06-18 21:37:15 --> Unknown column 'tbl_dpr.expired' in 'where clause'
+#0 D:\wamp64\www\ichimember\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT COUNT(*)...', 0)
+#1 D:\wamp64\www\ichimember\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*)...')
+#2 D:\wamp64\www\ichimember\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*)...')
+#3 D:\wamp64\www\ichimember\system\Database\BaseBuilder.php(1539): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', Array, false)
+#4 D:\wamp64\www\ichimember\system\Model.php(509): CodeIgniter\Database\BaseBuilder->countAllResults(true)
+#5 D:\wamp64\www\ichimember\app\Controllers\Superadmin.php(24): CodeIgniter\Model->countAllResults()
+#6 D:\wamp64\www\ichimember\system\CodeIgniter.php(832): App\Controllers\Superadmin->index()
+#7 D:\wamp64\www\ichimember\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Superadmin))
+#8 D:\wamp64\www\ichimember\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\wamp64\www\ichimember\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}

@@ -58,7 +58,7 @@ class Anggota extends BaseController
         $model = new DiriModel();
         $user = $model->where('user_id', $user_id)->first();
         $model1 = new UserModel();
-        $nama = $model1->where('user_id', $user_id)->first();
+        $nama = $model1->where('user_id', $user_id)->join('tbl_dpr','tbl_user.dpr_id = tbl_dpr.dpr_id','left')->first();
         if ($user){
             $data = [
                 'diri_id' => $user['diri_id'],
@@ -76,10 +76,15 @@ class Anggota extends BaseController
                 'bagidata' => $user['bagidata'],
                 'tempatkerja' => $user['tempatkerja'],
                 'alamatkerja' => $user['alamatkerja'],
+                'scholar_id' => $user['scholar_id'],
+                'scopus_id' => $user['scopus_id'],
+                'orcid_id' => $user['orcid_id'],
+                'sinta_id' => $user['sinta_id'],
                 'telpkerja' => $user['telpkerja'],
                 'emailkerja' => $user['emailkerja']
             ];
             $data['namalengkap'] = $nama['namalengkap'];
+            $data['dpr_nama'] = $nama['dpr_nama'];
         }else{
             $data['kosong'] = "kosong";
         }
@@ -262,6 +267,10 @@ class Anggota extends BaseController
                 $telpkerja = $this->request->getVar('telpkerja');
                 $emailkerja = $this->request->getVar('emailkerja');
                 $bagidata = $this->request->getVar('bagidata');
+                $scholar_id = $this->request->getVar('scholar_id');
+                $scopus_id = $this->request->getVar('scopus_id');
+                $orcid_id = $this->request->getVar('orcid_id');
+                $sinta_id = $this->request->getVar('sinta_id');
 
                 $ext = $uploadktp->getClientExtension();
                 $uploadktpname = $user_id.'_ktp.'.$ext;
@@ -292,6 +301,10 @@ class Anggota extends BaseController
                     'telpkerja' => $telpkerja,
                     'alamatkerja' => $alamatkerja,
                     'emailkerja' => $emailkerja,
+                    'scholar_id' => $scholar_id,
+                    'scopus_id' => $scopus_id,
+                    'orcid_id' => $orcid_id,
+                    'sinta_id' => $sinta_id,
                     'datecreated' => date('Y-m-d'),
                     'datemodified' => date('Y-m-d')
                 );
@@ -432,7 +445,11 @@ class Anggota extends BaseController
             'tempatkerja' => $datadiri['tempatkerja'],
             'alamatkerja' => $datadiri['alamatkerja'],
             'telpkerja' => $datadiri['telpkerja'],
-            'emailkerja' => $datadiri['emailkerja']
+            'emailkerja' => $datadiri['emailkerja'],
+            'scholar_id' => $datadiri['scholar_id'],
+            'scopus_id' => $datadiri['scopus_id'],
+            'orcid_id' => $datadiri['orcid_id'],
+            'sinta_id' => $datadiri['sinta_id']
         );
 
         $data['namalengkap'] = $nama['namalengkap'];
@@ -601,6 +618,10 @@ class Anggota extends BaseController
                 $telpkerja = $this->request->getVar('telpkerja');
                 $emailkerja = $this->request->getVar('emailkerja');
                 $bagidata = $this->request->getVar('bagidata');
+                $scholar_id = $this->request->getVar('scholar_id');
+                $scopus_id = $this->request->getVar('scopus_id');
+                $orcid_id = $this->request->getVar('orcid_id');
+                $sinta_id = $this->request->getVar('sinta_id');
 
                 $ext = $uploadktp->getClientExtension();
                 if ((empty($olduploadktp))&&(!empty($ext))){
@@ -656,7 +677,10 @@ class Anggota extends BaseController
                     'telpkerja' => $telpkerja,
                     'alamatkerja' => $alamatkerja,
                     'emailkerja' => $emailkerja,
-                    'datecreated' => date('Y-m-d'),
+                    'scholar_id' => $scholar_id,
+                    'scopus_id' => $scopus_id,
+                    'orcid_id' => $orcid_id,
+                    'sinta_id' => $sinta_id,
                     'datemodified' => date('Y-m-d')
                 );
     
@@ -686,7 +710,11 @@ class Anggota extends BaseController
                     'tempatkerja' => $datadiri['tempatkerja'],
                     'alamatkerja' => $datadiri['alamatkerja'],
                     'telpkerja' => $datadiri['telpkerja'],
-                    'emailkerja' => $datadiri['emailkerja']
+                    'emailkerja' => $datadiri['emailkerja'],
+                    'scholar_id' => $datadiri['scholar_id'],
+                    'scopus_id' => $datadiri['scopus_id'],
+                    'orcid_id' => $datadiri['orcid_id'],
+                    'sinta_id' => $datadiri['sinta_id']
                 );
         
                 $data['namalengkap'] = $nama['namalengkap'];

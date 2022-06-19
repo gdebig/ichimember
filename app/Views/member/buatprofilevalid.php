@@ -35,7 +35,7 @@
                             </label>
                             <div class="element">
                                 <input id="tempatlahir" name="tempatlahir" type="text" class="form-control"
-                                    placeholder="Tempat Lahir..." />
+                                    placeholder="Tempat Lahir..." value="<?= set_value('tempatlahir');?>" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -49,7 +49,8 @@
                                     </span>
                                 </div>
                                 <input type="text" class="form-control float-right data-datepicker" id="tanggallahir"
-                                    name="tanggallahir" placeholder="Tanggal Lahir..." />
+                                    name="tanggallahir" placeholder="Tanggal Lahir..."
+                                    value="<?= set_value('tanggallahir');?>" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -57,8 +58,10 @@
                             </label>
                             <div class="element">
                                 <select name="gender" id="gender" class="form-control">
-                                    <option value="laki">Laki-laki</option>
-                                    <option value="perempuan">Perempuan</option>
+                                    <option value="laki" <?= set_value('gender') == 'laki' ? "selected" : "";?>>
+                                        Laki-laki</option>
+                                    <option value="perempuan"
+                                        <?= set_value('gender') == 'perempuan' ? "selected" : "";?>>Perempuan</option>
                                 </select>
                             </div>
                         </div>
@@ -67,14 +70,14 @@
                                     *</span>&nbsp;</label>
                             <div class="element">
                                 <textarea id="alamat" name="alamat" class="form-control"
-                                    placeholder="Alamat Rumah..."></textarea>
+                                    placeholder="Alamat Rumah..."><?= set_value('alamat');?></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="noktp" class="element">Nomor KTP <span class="required">*</span>&nbsp;</label>
                             <div class="element">
-                                <input id="noktp" name="noktp" type="text" class="form-control"
-                                    placeholder="No KTP..." />
+                                <input id="noktp" name="noktp" type="text" class="form-control" placeholder="No KTP..."
+                                    value="<?= set_value('noktp');?>" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -89,14 +92,14 @@
                             <label for="notelp" class="element">Telepon (Nomor WhastApp)</label>
                             <div class="element">
                                 <input id="notelp" name="notelp" type="text" class="form-control"
-                                    placeholder="Telepon (Nomor WhatsApp)..." />
+                                    placeholder="Telepon (Nomor WhatsApp)..." value="<?= set_value('notelp');?>" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="email" class="element">Email <span class="required"> *</span>&nbsp;</label>
                             <div class="element">
-                                <input id="email" name="email" type="text" class="form-control"
-                                    placeholder="Email..." />
+                                <input id="email" name="email" type="text" class="form-control" placeholder="Email..."
+                                    value="<?= set_value('email');?>" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -111,7 +114,35 @@
                                     *</span>&nbsp;</label>
                             <div class="element">
                                 <input id="keahlian" name="keahlian" type="text" class="form-control"
-                                    placeholder="keahlian..." />
+                                    placeholder="keahlian..." value="<?= set_value('keahlian');?>" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="scholar_id" class="element">Google Scholar ID</label>
+                            <div class="element">
+                                <input id="scholar_id" name="scholar_id" type="text" class="form-control"
+                                    placeholder="Google Scholar ID..." value="<?= set_value('scholar_id');?>" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="scopus_id" class="element">Scopus ID</label>
+                            <div class="element">
+                                <input id="scopus_id" name="scopus_id" type="text" class="form-control"
+                                    placeholder="Scopus ID..." value="<?= set_value('scopus_id');?>" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="orcid_id" class="element">Orcid ID</label>
+                            <div class="element">
+                                <input id="orcid_id" name="orcid_id" type="text" class="form-control"
+                                    placeholder="Orcid ID..." value="<?= set_value('orcid_id');?>" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sinta_id" class="element">Sinta ID</label>
+                            <div class="element">
+                                <input id="sinta_id" name="sinta_id" type="text" class="form-control"
+                                    placeholder="Sinta ID..." value="<?= set_value('sinta_id');?>" />
                             </div>
                         </div>
                     </div>

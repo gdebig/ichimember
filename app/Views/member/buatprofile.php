@@ -107,11 +107,40 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="keahlian" class="element">Keahlian <span class="required">
+                            <label for="keahlian" class="element">Keahlian (pisahkan keahlian dengan tanda koma)<span
+                                    class="required">
                                     *</span>&nbsp;</label>
                             <div class="element">
                                 <input id="keahlian" name="keahlian" type="text" class="form-control"
-                                    placeholder="keahlian..." />
+                                    placeholder="Keahlian..." />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="scholar_id" class="element">Google Scholar ID</label>
+                            <div class="element">
+                                <input id="scholar_id" name="scholar_id" type="text" class="form-control"
+                                    placeholder="Google Scholar ID..." />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="scopus_id" class="element">Scopus ID</label>
+                            <div class="element">
+                                <input id="scopus_id" name="scopus_id" type="text" class="form-control"
+                                    placeholder="Scopus ID..." />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="orcid_id" class="element">Orcid ID</label>
+                            <div class="element">
+                                <input id="orcid_id" name="orcid_id" type="text" class="form-control"
+                                    placeholder="Orcid ID..." />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sinta_id" class="element">Sinta ID</label>
+                            <div class="element">
+                                <input id="sinta_id" name="sinta_id" type="text" class="form-control"
+                                    placeholder="Sinta ID..." />
                             </div>
                         </div>
                     </div>
