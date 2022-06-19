@@ -27,8 +27,8 @@
         width: 100%;
     }
     </style>
-    <link rel="shortcut icon" href="<?= base_url();?>/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="<?= base_url();?>/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="<?= base_url();?>/uploads/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?= base_url();?>/uploads/favicon.ico" type="image/x-icon">
 </head>
 
 <body class="hold-transition layout-top-nav">

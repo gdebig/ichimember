@@ -30,7 +30,7 @@
                         echo "Belum ada data anggota";
                     }else{
                     ?>
-                    <table id="tabledata" class="table table-bordered table-hover" style="width:100%">
+                    <table id="tabledata" class="table table1 table-bordered table-hover" style="width:100%">
                         <thead>
                             <tr>
                                 <th>No</th>

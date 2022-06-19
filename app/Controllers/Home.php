@@ -186,7 +186,7 @@ class Home extends BaseController
                         return redirect()->to('/admin');
                     }elseif($isanggota){
                         $session->set('role', 'anggota');
-                        return redirect()->to('/confanggota');
+                        return redirect()->to('/anggota');
                     }elseif($iscalon){
                         $session->set('role', 'calon');
                         return redirect()->to('/anggota');

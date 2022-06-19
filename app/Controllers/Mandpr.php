@@ -121,6 +121,9 @@ class Mandpr extends BaseController
                     'nosk' => $nosk,
                     'file_sk' => $filename,
                     'expired' => $expired,
+                    'alamat' => $alamat,
+                    'email' => $email,
+                    'notelp' => $notelp,
                     'datecreated' => date('Y-m-d'),
                     'datamodified' => date('Y-m-d')
                 );

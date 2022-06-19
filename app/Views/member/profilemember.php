@@ -30,17 +30,26 @@
                             <td width="5%" style="text-align:center">:</td>
                             <td width="65%"><?= $info_member['dpr_nama'];?></td>
                         </tr>
+                        <?php
+                        if ($info_profile['bagidata']=="Ya"){
+                        ?>
                         <tr>
                             <td width="30%">Tempat & Tanggal Lahir</td>
                             <td width="5%" style="text-align:center">:</td>
                             <td width="65%">
                                 <?= $info_profile['tempatlahir'].", ".format_indo($info_profile['tanggallahir']);?></td>
                         </tr>
+                        <?php
+                        }
+                        ?>
                         <tr>
                             <td width="30%">Gender</td>
                             <td width="5%" style="text-align:center">:</td>
                             <td width="65%"><?= $info_profile['gender']=="laki" ? "Laki-laki" : "Perempuan";?></td>
                         </tr>
+                        <?php
+                        if ($info_profile['bagidata']=="Ya"){
+                        ?>
                         <tr>
                             <td width="30%">Alamat Rumah</td>
                             <td width="5%" style="text-align:center">:</td>
@@ -56,6 +65,9 @@
                             <td width="5%" style="text-align:center">:</td>
                             <td width="65%"><?= $info_profile['email'];?></td>
                         </tr>
+                        <?php
+                        }
+                        ?>
                         <tr>
                             <td width="30%">Foto</td>
                             <td width="5%" style="text-align:center">:</td>
