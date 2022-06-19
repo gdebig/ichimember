@@ -28,10 +28,10 @@
     <div class="content">
         <section class="content">
             <div class="container-fluid">
-                <div class="row mx-auto justify-content-center">
+                <div class="row mx-auto">
                     <div class="col-6 mx-auto">
 
-                        <div class="card" style="min-width: 300px">
+                        <div class="card" sytle="min-width: 300px">
                             <div class="card-header">
                                 <h3 class="card-title">Form Login</h3>
                                 <!--<div class="card-tools">
